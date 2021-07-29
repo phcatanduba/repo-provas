@@ -13,9 +13,7 @@ export default async function connectDatabase() {
         name: 'default',
         type: 'postgres',
         url: process.env.DATABASE_URL,
-        entities: [
-            `${process.env.NODE_ENV === '' ? 'dist' : 'src'}/entities/*.*`,
-        ],
+        entities: ['src/modules/**/*.entity.{ts,js}'],
         ssl: {
             rejectUnauthorized: false,
         },
