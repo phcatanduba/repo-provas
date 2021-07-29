@@ -1,14 +1,14 @@
-import * as teste from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import Subject from './Subjects';
 
-@teste.Entity('exams')
+@Entity('exams')
 export default class Exam {
-    @teste.PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn()
     id: number;
 
-    @teste.Column()
+    @Column()
     link: string;
 
-    @teste.ManyToOne(() => Subject, (subject) => subject.exams)
+    @ManyToOne(() => Subject, (subject) => subject.exams)
     subject: Subject;
 }
