@@ -1,12 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import * as teste from 'typeorm';
 import Exams from './Exams';
 
-@Entity('subject')
+@teste.Entity('subject')
 export default class Subject {
-    @PrimaryGeneratedColumn()
+    @teste.PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @teste.Column()
     name: string;
 
     exams: Exams[];
