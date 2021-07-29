@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
-import Subject from './Subjects';
+import Teacher from './Teachers';
+import Category from './Categories';
 
 @Entity('exams')
 export default class Exam {
@@ -7,8 +8,14 @@ export default class Exam {
     id: number;
 
     @Column()
+    name: string;
+
+    @Column()
     link: string;
 
-    @ManyToOne(() => Subject, (subject) => subject.exams)
-    subject: Subject;
+    @ManyToOne(() => Teacher, (teachers) => teachers.exams)
+    teachers: Teacher;
+
+    @ManyToOne(() => Category, (categories) => categories.exams)
+    categories: Category;
 }
