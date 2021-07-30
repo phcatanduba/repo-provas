@@ -1,13 +1,13 @@
 import { getConnectionManager } from 'typeorm';
-import dotenv from 'dotenv';
 
-if (process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'test') {
-    dotenv.config({
-        path: process.env.NODE_ENV === 'test' ? '.env.test' : '.env',
-    });
+if (
+    process.env.NODE_ENV === 'production' &&
+    process.env.DATABASE_URL.indexOf('sslmode=require') === -1
+) {
+    process.env.DATABASE_URL += '?sslmode=require';
 }
 
-export default async function connectDatabase() {
+export default async function connect() {
     const connectionManager = await getConnectionManager();
     const connection = connectionManager.create({
         name: 'default',
@@ -18,9 +18,8 @@ export default async function connectDatabase() {
                 process.env.NODE_ENV === 'production' ? 'dist' : 'src'
             }/entities/*.*`,
         ],
-        ssl: {
-            rejectUnauthorized: false,
-        },
+        ssl: process.env.NODE_ENV === 'production',
     });
     await connection.connect();
+    return connection;
 }
