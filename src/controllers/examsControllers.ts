@@ -16,7 +16,14 @@ export async function upload(req: Request, res: Response) {
             categories: joi.number().required(),
         });
 
-        examsServices.insertAnExam({ link, name, teachersId, categoriesId });
+        await examsServices.checkIfLinkAlreadyExists(link);
+
+        await examsServices.insertAnExam({
+            link,
+            name,
+            teachersId,
+            categoriesId,
+        });
         res.sendStatus(200);
     }
 }

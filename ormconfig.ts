@@ -5,10 +5,14 @@ module.exports = {
     url: process.env.DATABASE_URL,
     migrationsTableName: 'migrations',
     entities: [
-        `${process.env.NODE_ENV === undefined ? 'dist' : 'src'}/entities/*.*`,
+        `${
+            process.env.NODE_ENV === 'production' ? 'dist' : 'src'
+        }/entities/*.*`,
     ],
     migrations: [
-        `${process.env.NODE_ENV === undefined ? 'dist' : 'src'}/entities/*.*`,
+        `${
+            process.env.NODE_ENV === 'production' ? 'dist' : 'src'
+        }/migrations/*.ts`,
     ],
     cli: {
         migrationsDir: 'src/migrations',

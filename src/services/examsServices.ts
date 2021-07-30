@@ -11,3 +11,7 @@ interface createExam {
 export async function insertAnExam(exam: createExam) {
     await getRepository(Exams).insert(exam);
 }
+
+export async function checkIfLinkAlreadyExists(link: string) {
+    await getRepository(Exams).find({ link });
+}
