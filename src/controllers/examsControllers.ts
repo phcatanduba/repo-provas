@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import Exams from '../entities/Exams';
-import joi from 'joi';
 import * as examsServices from '../services/examsServices';
 
 export async function upload(req: Request, res: Response) {
@@ -9,21 +8,26 @@ export async function upload(req: Request, res: Response) {
     if (!link || !teachersId || !name || !categoriesId) {
         res.sendStatus(400);
     } else {
-        const examSchema = joi.object().keys({
-            name: joi.string().required(),
-            link: joi.string().required(),
-            teachers: joi.number().required(),
-            categories: joi.number().required(),
-        });
+        try {
+            const { hasLink, hasTeachersId, hasCategoriesId } =
+                await examsServices.checkExam(link, teachersId, categoriesId);
 
-        await examsServices.checkIfLinkAlreadyExists(link);
-
-        await examsServices.insertAnExam({
-            link,
-            name,
-            teachersId,
-            categoriesId,
-        });
-        res.sendStatus(200);
+            if (hasLink) {
+                res.sendStatus(409);
+            } else if (!hasTeachersId || !hasCategoriesId) {
+                res.sendStatus(400);
+            } else {
+                await examsServices.insertAnExam({
+                    link,
+                    name,
+                    teachersId,
+                    categoriesId,
+                });
+                res.sendStatus(200);
+            }
+        } catch (e) {
+            console.log(e);
+            res.sendStatus(500);
+        }
     }
 }

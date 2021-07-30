@@ -1,5 +1,7 @@
 import { getRepository } from 'typeorm';
 import Exams from '../entities/Exams';
+import * as teachersServices from '../services/teachersServices';
+import * as categoriesServices from '../services/categoriesServices';
 
 interface createExam {
     link: string;
@@ -13,5 +15,25 @@ export async function insertAnExam(exam: createExam) {
 }
 
 export async function checkIfLinkAlreadyExists(link: string) {
-    await getRepository(Exams).find({ link });
+    const result = await getRepository(Exams).find({ link });
+    if (result.length !== 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+export async function checkExam(
+    link: string,
+    teachersId: number,
+    categoriesId: number
+) {
+    const hasLink = await checkIfLinkAlreadyExists(link);
+    const hasTeachersId = await teachersServices.checkIfTeachersIdExists(
+        teachersId
+    );
+    const hasCategoriesId = await categoriesServices.checkIfCategoriesIdExists(
+        categoriesId
+    );
+    return { hasLink, hasTeachersId, hasCategoriesId };
 }
