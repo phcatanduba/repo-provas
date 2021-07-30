@@ -10,6 +10,23 @@ interface createExam {
     categoriesId: number;
 }
 
+export async function getByTeacher(teachersId: number) {
+    const result = await getRepository(Exams).find({
+        relations: ['categories'],
+    });
+    const filterResult = result.filter((r) => {
+        return r.teachersId === teachersId;
+    });
+    return filterResult;
+}
+
+export async function getBySubject() {
+    const result = await await getRepository(Exams).find({
+        relations: ['categories'],
+    });
+    return result;
+}
+
 export async function insertAnExam(exam: createExam) {
     await getRepository(Exams).insert(exam);
 }

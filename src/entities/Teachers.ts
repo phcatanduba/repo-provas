@@ -10,6 +10,9 @@ export default class Teacher {
     @Column()
     name: string;
 
+    @Column()
+    subjectsId: number;
+
     @ManyToOne(() => Subject, (subjects) => subjects.exams)
     subjects: Subject;
 

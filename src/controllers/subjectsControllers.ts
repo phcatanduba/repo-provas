@@ -1,10 +1,9 @@
 import { Request, Response } from 'express';
-import { getRepository } from 'typeorm';
-import Subject from '../entities/Subjects';
+import * as subjectsServices from '../services/subjectsServices';
 
-export async function get(req: Request, res: Response) {
+export async function getAll(req: Request, res: Response) {
     try {
-        const result = await getRepository(Subject).find();
+        const result = await subjectsServices.getAll();
         res.send(result);
     } catch (e) {
         console.log(e);

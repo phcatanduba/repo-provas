@@ -1,8 +1,10 @@
 import { Request, Response } from 'express';
-import { getRepository } from 'typeorm';
+import * as teachersServices from '../services/teachersServices';
 
-export async function get(req: Request, res: Response) {
+export async function getAll(req: Request, res: Response) {
     try {
+        const result = await teachersServices.getAll();
+        res.send(result);
     } catch (e) {
         console.log(e);
         res.sendStatus(500);

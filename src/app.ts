@@ -4,7 +4,7 @@ import connectDatabase from './database';
 import 'reflect-metadata';
 import * as examsControllers from '../src/controllers/examsControllers';
 import * as teachersControllers from '../src/controllers/teachersControllers';
-import * as subjectsControllers from '../src/controllers/teachersControllers';
+import * as subjectsControllers from '../src/controllers/subjectsControllers';
 
 const app = express();
 app.use(cors());
@@ -16,8 +16,12 @@ export async function init() {
 
 app.post('/exams', examsControllers.upload);
 
-app.get('/subjects', subjectsControllers.get);
+app.get('/subjects', subjectsControllers.getAll);
 
-app.get('/teachers', teachersControllers.get);
+app.get('/teachers', teachersControllers.getAll);
+
+app.get('/exams/teachers', examsControllers.getByTeacher);
+
+app.get('/exams/subjects', examsControllers.getBySubject);
 
 export default app;

@@ -10,6 +10,9 @@ export default class Subject {
     @Column()
     name: string;
 
+    @Column()
+    quarter: number;
+
     exams: Exams[];
 
     teachers: Teacher[];

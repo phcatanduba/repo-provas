@@ -10,3 +10,8 @@ export async function checkIfTeachersIdExists(teachersId: number) {
         return false;
     }
 }
+
+export async function getAll() {
+    const result = await getRepository(Teacher).find();
+    return result;
+}
