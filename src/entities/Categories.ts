@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-import Exam from './Exams';
+import Exams from './Exams';
 
 @Entity('categories')
 export default class Category {
@@ -9,5 +9,5 @@ export default class Category {
     @Column()
     type: string;
 
-    exams: Exam[];
+    exams: Exams[];
 }

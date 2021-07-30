@@ -3,7 +3,7 @@ import Teacher from './Teachers';
 import Category from './Categories';
 
 @Entity('exams')
-export default class Exam {
+export default class Exams {
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -12,6 +12,12 @@ export default class Exam {
 
     @Column()
     link: string;
+
+    @Column()
+    teachersId: number;
+
+    @Column()
+    categoriesId: number;
 
     @ManyToOne(() => Teacher, (teachers) => teachers.exams)
     teachers: Teacher;

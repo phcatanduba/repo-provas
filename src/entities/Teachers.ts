@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
-import Exam from './Exams';
+import Exams from './Exams';
 import Subject from './Subjects';
 
 @Entity('teachers')
@@ -13,5 +13,5 @@ export default class Teacher {
     @ManyToOne(() => Subject, (subjects) => subjects.exams)
     subjects: Subject;
 
-    exams: Exam[];
+    exams: Exams[];
 }

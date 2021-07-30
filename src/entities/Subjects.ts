@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
-import Exam from './Exams';
+import Exams from './Exams';
 import Teacher from './Teachers';
 
 @Entity('subjects')
@@ -10,7 +10,7 @@ export default class Subject {
     @Column()
     name: string;
 
-    exams: Exam[];
+    exams: Exams[];
 
     teachers: Teacher[];
 }
