@@ -1,4 +1,5 @@
 import { getConnectionManager } from 'typeorm';
+import './setup';
 
 if (
     process.env.NODE_ENV === 'production' &&
