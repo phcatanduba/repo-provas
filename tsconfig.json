@@ -4,7 +4,6 @@
     "esModuleInterop": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "lib": ["es2018", "dom"],
   },
   "exclude": [
     "node_modules",

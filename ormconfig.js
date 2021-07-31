@@ -4,7 +4,11 @@ module.exports = {
     type: 'postgres',
     url: process.env.DATABASE_URL,
     migrationsTableName: 'migrations',
-    entities: ['dist/entities/*.*'],
+    entities: [
+        `${
+            process.env.NODE_ENV === 'production' ? 'dist' : 'src'
+        }/entities/*.*`,
+    ],
     migrations: ['dist/migrations/*.js'],
     cli: {
         migrationsDir: 'src/migrations',
