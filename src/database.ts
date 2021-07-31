@@ -1,13 +1,6 @@
 import { getConnectionManager } from 'typeorm';
 import './setup';
 
-if (
-    process.env.NODE_ENV === 'production' &&
-    process.env.DATABASE_URL.indexOf('sslmode=require') === -1
-) {
-    process.env.DATABASE_URL += '?sslmode=require';
-}
-
 export default async function connect() {
     const connectionManager = await getConnectionManager();
     const connection = connectionManager.create({
@@ -17,9 +10,11 @@ export default async function connect() {
         entities: [
             `${
                 process.env.NODE_ENV === 'production' ? 'dist' : 'src'
-            }/entities/*.ts`,
+            }/entities/*.*`,
         ],
-        ssl: process.env.NODE_ENV === 'production',
+        ssl: {
+            rejectUnauthorized: false,
+        },
     });
     await connection.connect();
     return connection;
