@@ -17,7 +17,7 @@ export default async function connect() {
         entities: [
             `${
                 process.env.NODE_ENV === 'production' ? 'dist' : 'src'
-            }/entities/*.*`,
+            }/entities/*.ts`,
         ],
         ssl: process.env.NODE_ENV === 'production',
     });
