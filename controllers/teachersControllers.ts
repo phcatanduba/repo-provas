@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import * as teachersServices from '../services/teachersServices';
+import * as teachersServices from '../src/services/teachersServices';
 
 export async function getAll(req: Request, res: Response) {
     try {
