@@ -12,9 +12,7 @@ export default async function connect() {
                 process.env.NODE_ENV === 'production' ? 'dist' : 'src'
             }/entities/*.*`,
         ],
-        ssl: {
-            rejectUnauthorized: false,
-        },
+        ssl: process.env.NODE_ENV === 'production',
     });
     await connection.connect();
     return connection;
