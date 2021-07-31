@@ -1,4 +1,4 @@
-import app, { init } from './src/app';
+import app, { init } from './app';
 
 init().then(() => {
     const PORT = parseInt(process.env.PORT) || 4000;

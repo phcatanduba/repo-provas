@@ -2,9 +2,9 @@ import express from 'express';
 import cors from 'cors';
 import connectDatabase from './database';
 import 'reflect-metadata';
-import * as examsControllers from '../controllers/examsControllers';
-import * as teachersControllers from '../controllers/teachersControllers';
-import * as subjectsControllers from '../controllers/subjectsControllers';
+import * as examsControllers from './controllers/examsControllers';
+import * as teachersControllers from './controllers/teachersControllers';
+import * as subjectsControllers from './controllers/subjectsControllers';
 
 const app = express();
 app.use(cors());

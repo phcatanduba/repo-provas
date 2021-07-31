@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import Exams from '../src/entities/Exams';
-import * as examsServices from '../src/services/examsServices';
+import Exams from '../entities/Exams';
+import * as examsServices from '../services/examsServices';
 
 export async function upload(req: Request, res: Response) {
     const { link, name, teachersId, categoriesId } = req.body as Exams;
