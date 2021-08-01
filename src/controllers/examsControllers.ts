@@ -33,31 +33,21 @@ export async function upload(req: Request, res: Response) {
 }
 
 export async function getByTeacher(req: Request, res: Response) {
-    const { teachersId }: { teachersId: number } = req.body;
-    if (!teachersId) {
-        res.sendStatus(400);
-    } else {
-        try {
-            const result = await examsServices.getByTeacher(teachersId);
-            res.send(result);
-        } catch (e) {
-            console.log(e);
-            res.sendStatus(500);
-        }
+    try {
+        const result = await examsServices.getByTeacher();
+        res.send(result);
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500);
     }
 }
 
 export async function getBySubject(req: Request, res: Response) {
-    const { subjectsId }: { subjectsId: number } = req.body;
-    if (!subjectsId) {
-        res.sendStatus(400);
-    } else {
-        try {
-            const result = await examsServices.getBySubject();
-            res.send(result);
-        } catch (e) {
-            console.log(e);
-            res.sendStatus(500);
-        }
+    try {
+        const result = await examsServices.getBySubject();
+        res.send(result);
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500);
     }
 }

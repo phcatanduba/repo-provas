@@ -2,7 +2,10 @@ import Subject from '../entities/Subjects';
 import { getRepository } from 'typeorm';
 
 export async function getAll() {
-    const result = await getRepository(Subject).find();
+    const result = await getRepository(Subject)
+        .createQueryBuilder('subjects')
+        .orderBy('quarter', 'ASC')
+        .getMany();
     return result;
 }
 
